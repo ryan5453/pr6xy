@@ -61,7 +61,7 @@ async def get(request: Request, internal_params: str) -> Response:
                 return Response(status_code=500, headers={"X-Pr6xy-Failed": "true"})
 
             headers_header_data = base64.b64encode(
-                str(dict(response.headers)).encode("utf-8")
+                json.dumps(dict(response.headers)).encode()
             ).decode("utf-8")
             headers = {
                 "X-Returned-Headers": headers_header_data,
@@ -97,7 +97,7 @@ async def post(request: Request, internal_params: str) -> Response:
                 return Response(status_code=500, headers={"X-Pr6xy-Failed": "true"})
 
             headers_header_data = base64.b64encode(
-                str(dict(response.headers)).encode("utf-8")
+                json.dumps(dict(response.headers)).encode()
             ).decode("utf-8")
             headers = {
                 "X-Returned-Headers": headers_header_data,
