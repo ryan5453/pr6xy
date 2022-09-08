@@ -21,7 +21,7 @@
 </p>
 
 ## What is this?
-Pr6xy is a very simple proxy server that uses IPV6 rotation. It is NOT a normal HTTP proxy, so attempting to use it as so will make ALL requests fail. Please refer to the [API documentation](https://github.com/ryan5453/pr6xy/blob/main/documentation.md) for more information.
+Pr6xy is a very simple proxy server that uses IPv6 rotation. It is not a normal HTTP proxy, so attempting to use it as so will make all requests fail. Please refer to the [API documentation](https://github.com/ryan5453/pr6xy/blob/main/documentation.md) for more information.
 
 ## Notice
 Pr6xy does not use any sort of authentication, so please do not use this without a proper firewall in place. If you need to access it from multiple servers, I recommend using [Tailscale](https://tailscale.com).

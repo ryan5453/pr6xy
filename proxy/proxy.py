@@ -1,6 +1,6 @@
-import ast
 import base64
 import ipaddress
+import json
 import os
 import random
 
@@ -39,7 +39,7 @@ async def get_random_ip(use_ipv6: bool = False):
 
 @app.get("/")
 async def get(request: Request, internal_params: str) -> Response:
-    internal_params = ast.literal_eval(internal_params)
+    internal_params = json.loads(internal_params)
 
     if not internal_params["headers"].get("Content-Type") and request.headers.get(
         "Content-Type"
@@ -58,7 +58,7 @@ async def get(request: Request, internal_params: str) -> Response:
                     follow_redirects=True,
                 )
             except Exception:
-                return Response(status_code=500)
+                return Response(status_code=500, headers={"X-Pr6xy-Failed": "true"})
 
             headers_header_data = base64.b64encode(
                 str(dict(response.headers)).encode("utf-8")
@@ -76,7 +76,7 @@ async def get(request: Request, internal_params: str) -> Response:
 
 @app.post("/")
 async def post(request: Request, internal_params: str) -> Response:
-    internal_params = ast.literal_eval(internal_params)
+    internal_params = json.loads(internal_params)
 
     if not internal_params["headers"].get("Content-Type"):
         internal_params["headers"]["Content-Type"] = request.headers.get("Content-Type")
@@ -94,7 +94,7 @@ async def post(request: Request, internal_params: str) -> Response:
                     follow_redirects=True,
                 )
             except Exception:
-                return Response(status_code=500)
+                return Response(status_code=500, headers={"X-Pr6xy-Failed": "true"})
 
             headers_header_data = base64.b64encode(
                 str(dict(response.headers)).encode("utf-8")
