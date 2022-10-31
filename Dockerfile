@@ -19,5 +19,5 @@ COPY ./ /app/
 
 WORKDIR /app
 
-ENTRYPOINT uvicorn proxy:app --host 0.0.0.0 --port 9999
+ENTRYPOINT uvicorn proxy:app --host 0.0.0.0 --port 9999 --http h11
 
